@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    <center>
+        <h2> Administrator Confirm </h2>
+        <form action="" method="POST" name="login" class="form-inline">
+            <div class="form-group">
+                <label class="sr-only">Password</label>
+                <input type="password" class="form-control" name="password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-default">Confirm identity</button>
+        </form>
+    </center>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+{{ super() }}
+<script type="text/javascript">
+var a = document.getElementById('nav-home');
+    var b = document.getElementById('nav-login');
+    a.className = "link";
+    b.className = "active";
+
+</script>
+{% endblock %}
+
+
