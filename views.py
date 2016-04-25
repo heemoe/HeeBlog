@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flask import Blueprint, redirect, request, render_template, url_for
 from flask.views import MethodView
 from .models import Post, Comment
