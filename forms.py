@@ -1,8 +1,9 @@
-from wtforms import Form,PasswordField,TextField,TextAreaField
+from wtforms import Form, PasswordField, StringField
+
 
 class LoginForm(Form):
     password = PasswordField('password')
 
 
 class PostForm(Form):
-    title = TextField('postTitle')
+    title = StringField('postTitle')
