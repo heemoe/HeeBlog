@@ -1,36 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Hee's Blog</title>
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-        <style>.content {padding-top: 80px;}</style>
-    </head>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <title>Hee's Blog</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>.content {padding-top: 80px;}</style>
+</head>
 
-    <body>
+<body>
 
-    {%- block topbar -%}
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <h2>
-                    <a href="/" class="brand">Heeeeeeee</a> <small>Write the code, change the world;</small>
-                </h2>
-            </div>
-            <div class="navbar-collapse">
-            </div> <!--/.nav-collapse -->
-        </div>
-    </nav>
-    {%- endblock -%}
-
+{%- block topbar -%}
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
-        <div class="content">
-            {% block page_header %} {% endblock %}
-            {% block content %} {% endblock %}
+        <div class="navbar-header">
+                <h2>
+                    <a href="/" class="brand">Heeeeeee</a>
+                    <small>Write the code, change the world;</small>
+                </h2>
         </div>
+        <div class="navbar-collapse">
+        </div> <!--/.nav-collapse -->
     </div>
-    {% block js_footer %} {% endblock %}
-    </body>
+</nav>
+{%- endblock -%}
+
+<div class="container">
+    <div class="content">
+        {% block page_header %} {% endblock %}
+        {% block content %} {% endblock %}
+    </div>
+</div>
+{% block js_footer %} {% endblock %}
+</body>
 </html>
 
 
