@@ -4,7 +4,7 @@ from flask.views import MethodView
 from flask_mongoengine.wtf import model_form
 
 from auth import requires_auth
-from models import Post, Comment
+from models import Post, BlogPost, Video, Image, Quote, Comment
 
 admin = Blueprint('admin', __name__, template_folder='templates')
 
@@ -21,20 +21,31 @@ class List(MethodView):
 class Detail(MethodView):
 
     decorators = [requires_auth]
+    # Map post types to models
+    class_map = {
+        'post': BlogPost,
+        'video': Video,
+        'image': Image,
+        'quote': Quote,
+    }
 
     def get_context(self, slug=None):
-        form_cls = model_form(Post, exclude=('created_at', 'comments'))
 
         if slug:
             post = Post.objects.get_or_404(slug=slug)
+            # Handle old posts types as well
+            cls = post.__class__ if post.__class__ != Post else BlogPost
+            form_cls = model_form(cls,  exclude=('created_at', 'comments'))
             if request.method == 'POST':
                 form = form_cls(request.form, inital=post._data)
             else:
                 form = form_cls(obj=post)
         else:
-            post = Post()
+            # Determine which post type we need
+            cls = self.class_map.get(request.args.get('type', 'post'))
+            post = cls()
+            form_cls = model_form(cls,  exclude=('created_at', 'comments'))
             form = form_cls(request.form)
-
         context = {
             "post": post,
             "form": form,
