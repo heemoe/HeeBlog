@@ -19,12 +19,22 @@ from models import Post as Article
 articles = Article.objects.all()
 alist = dict()
 for one in articles:
+    myComments = dict()
+    if one.comments is None:
+        myComments = {}
+    else:
+        for comment in one.comments:
+            myComments = {
+                'created_at': str(comment.created_at),
+                'body': str(comment.body),
+                'author' : str(comment.author),
+            }
     json_dict = {
-        'created_at' : one.created_at,
+        'created_at' : str(one.created_at),
         'title' : one.title,
         'slug' : one.slug,
-        'body' : one.body,
-        'comments' : one.comments
+        'body' : str(one.body),
+        'comments' : myComments
     }
     alist.setdefault(one.slug, json_dict)
 
@@ -43,7 +53,8 @@ class Post(Resource):
 
 class Posts(Resource):
     def get(self):
-        return alist
+        print(alist)
+        return {"posts":alist}
 
     # def post(self):
     #     args = parser.parse_args()
@@ -54,7 +65,7 @@ class Posts(Resource):
     #     return TODOS[todo_id],201
 
 api.add_resource(Posts, '/posts/')
-api.add_resource(Post, '/posts/<string:slug>')
+api.add_resource(Post, '/posts/<slug>')
 
 def register_blueprints(app):
     from views import posts
